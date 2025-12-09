@@ -25,7 +25,7 @@ export default async function HomePage({ params }: HomePageProps) {
   return (
     <div className="w-full">
       {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden carpet-texture">
+      <section className="scroll-snap-section-hero relative min-h-[90vh] flex items-center justify-center overflow-hidden carpet-texture">
         {/* Magic Sparkles */}
         <MagicSparkles count={30} />
         
@@ -88,7 +88,7 @@ export default async function HomePage({ params }: HomePageProps) {
       </section>
 
       {/* Coffee Experience Video Section */}
-      <section className="py-20 relative overflow-hidden bg-gradient-to-b from-background via-muted/30 to-background">
+      <section className="scroll-snap-section py-20 relative overflow-hidden bg-gradient-to-b from-background via-muted/30 to-background">
         <div className="absolute inset-0 opacity-5">
           <CarpetPattern variant="geometric" className="w-full h-full" />
         </div>
@@ -120,7 +120,7 @@ export default async function HomePage({ params }: HomePageProps) {
       </section>
 
       {/* Brand Story Section */}
-      <section className="py-20 relative overflow-hidden">
+      <section className="scroll-snap-section py-20 relative overflow-hidden">
         <div className="absolute inset-0 opacity-5">
           <CarpetPattern variant="diamond" className="w-full h-full" />
         </div>
@@ -214,7 +214,7 @@ export default async function HomePage({ params }: HomePageProps) {
       </section>
 
       {/* Featured Products Section - ELEGANT SHOWCASE */}
-      <section className="py-24 relative overflow-hidden bg-gradient-to-b from-muted/20 via-background to-background">
+      <section className="scroll-snap-section py-24 relative overflow-hidden bg-gradient-to-b from-muted/20 via-background to-background">
         {/* Decorative background pattern */}
         <div className="absolute inset-0 opacity-[0.03]">
           <CarpetPattern variant="medallion" className="w-full h-full" />

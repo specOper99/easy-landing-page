@@ -54,7 +54,14 @@
   margin: 0;
 }
 
-html,
+html {
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
 body {
   max-width: 100vw;
   overflow-x: hidden;
@@ -232,6 +239,29 @@ button {
     right: -2px;
     border-left: none;
     border-top: none;
+  }
+
+  /* Scroll Snap Sections */
+  .scroll-snap-section {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  /* Hero section special - allows for slightly less than 100vh */
+  .scroll-snap-section-hero {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    min-height: 90vh;
+  }
+
+  /* For sections that don't need full height */
+  .scroll-snap-section-auto {
+    scroll-snap-align: start;
+    scroll-snap-stop: normal;
   }
 }
 
