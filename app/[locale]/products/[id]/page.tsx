@@ -1,6 +1,7 @@
 import { CarpetPattern } from '@/components/patterns/CarpetPattern';
 import { Divider } from '@/components/patterns/Divider';
-import { ProductCard } from '@/components/products/ProductCard';
+import { LazyProductGrid } from '@/components/products/LazyProductGrid';
+import { ProductGridSkeleton } from '@/components/products/ProductCardSkeleton';
 import { Button } from '@/components/ui/Button';
 import { getProductById, getProducts } from '@/lib/sanity/client';
 import { formatPrice } from '@/lib/utils';
@@ -9,14 +10,87 @@ import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { Suspense } from 'react';
 
 interface ProductPageProps {
   params: Promise<{ locale: string; id: string }>;
 }
 
-export default async function ProductPage({ params }: ProductPageProps) {
-  const { locale, id } = await params;
+// Skeleton for the main product details
+function ProductDetailsSkeleton() {
+  return (
+    <section className="py-12 relative">
+      <div className="container-custom relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          {/* Image Skeleton */}
+          <div className="relative aspect-square bg-muted rounded-lg overflow-hidden animate-pulse" />
+          
+          {/* Info Skeleton */}
+          <div className="space-y-6">
+            <div className="h-8 w-24 bg-muted rounded-full animate-pulse" />
+            <div className="h-12 w-3/4 bg-muted rounded animate-pulse" />
+            <div className="flex items-center gap-6">
+              <div className="h-8 w-32 bg-muted rounded animate-pulse" />
+              <div className="h-6 w-24 bg-muted rounded animate-pulse" />
+            </div>
+            <div className="h-14 w-44 bg-muted rounded animate-pulse" />
+            <div className="h-px w-full bg-border" />
+            <div className="space-y-3">
+              <div className="h-8 w-32 bg-muted rounded animate-pulse" />
+              <div className="h-4 w-full bg-muted rounded animate-pulse" />
+              <div className="h-4 w-5/6 bg-muted rounded animate-pulse" />
+              <div className="h-4 w-4/6 bg-muted rounded animate-pulse" />
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="h-24 bg-muted rounded-lg animate-pulse" />
+              <div className="h-24 bg-muted rounded-lg animate-pulse" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// Related products section component with Suspense
+async function RelatedProductsSection({ 
+  productId, 
+  categorySlug, 
+  locale 
+}: { 
+  productId: string; 
+  categorySlug?: string; 
+  locale: string;
+}) {
+  const t = await getTranslations('products');
   
+  // Get related products (same category, excluding current)
+  const allProducts = await getProducts();
+  const relatedProducts = allProducts
+    .filter((p) => p.category?.slug === categorySlug && p.id !== productId)
+    .slice(0, 3);
+
+  if (relatedProducts.length === 0) {
+    return null;
+  }
+
+  return (
+    <>
+      <Divider variant="ornate" />
+      <section className="py-16 bg-muted/30">
+        <div className="container-custom">
+          <h2 className="text-3xl md:text-4xl font-amiri font-bold text-center mb-12">
+            {t('relatedProducts')}
+          </h2>
+          <LazyProductGrid products={relatedProducts} locale={locale} />
+        </div>
+      </section>
+    </>
+  );
+}
+
+// Main product content component
+async function ProductContent({ locale, id }: { locale: string; id: string }) {
   const t = await getTranslations('products');
   const tCommon = await getTranslations('common');
 
@@ -34,14 +108,8 @@ export default async function ProductPage({ params }: ProductPageProps) {
   const imageUrl = product.images?.[0] || null;
   const hasImage = imageUrl && imageUrl.length > 0;
 
-  // Get related products (same category, excluding current)
-  const allProducts = await getProducts();
-  const relatedProducts = allProducts
-    .filter((p) => p.category?.slug === product.category?.slug && p.id !== product.id)
-    .slice(0, 3);
-
   return (
-    <div className="w-full">
+    <>
       {/* Back Button */}
       <div className="container-custom py-6">
         <Link href={`/${locale}/products`}>
@@ -157,28 +225,33 @@ export default async function ProductPage({ params }: ProductPageProps) {
         </div>
       </section>
 
-      {/* Related Products */}
-      {relatedProducts.length > 0 && (
-        <>
-          <Divider variant="ornate" />
-          <section className="py-16 bg-muted/30">
-            <div className="container-custom">
-              <h2 className="text-3xl md:text-4xl font-amiri font-bold text-center mb-12">
-                {t('relatedProducts')}
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {relatedProducts.map((relatedProduct) => (
-                  <ProductCard
-                    key={relatedProduct.id}
-                    product={relatedProduct}
-                    locale={locale}
-                  />
-                ))}
-              </div>
-            </div>
-          </section>
-        </>
-      )}
+      {/* Related Products - Streamed separately */}
+      <Suspense fallback={
+        <section className="py-16 bg-muted/30">
+          <div className="container-custom">
+            <div className="h-10 w-64 mx-auto bg-muted rounded animate-pulse mb-12" />
+            <ProductGridSkeleton count={3} />
+          </div>
+        </section>
+      }>
+        <RelatedProductsSection 
+          productId={product.id} 
+          categorySlug={product.category?.slug} 
+          locale={locale} 
+        />
+      </Suspense>
+    </>
+  );
+}
+
+export default async function ProductPage({ params }: ProductPageProps) {
+  const { locale, id } = await params;
+  
+  return (
+    <div className="w-full">
+      <Suspense fallback={<ProductDetailsSkeleton />}>
+        <ProductContent locale={locale} id={id} />
+      </Suspense>
     </div>
   );
 }

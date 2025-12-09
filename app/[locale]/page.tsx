@@ -2,12 +2,12 @@ import { MagicSparkles } from '@/components/effects/MagicSparkles';
 import { CarpetPattern } from '@/components/patterns/CarpetPattern';
 import { Divider } from '@/components/patterns/Divider';
 import { FlyingCarpet } from '@/components/patterns/FlyingCarpet';
-import { ProductCard } from '@/components/products/ProductCard';
+import { FeaturedProductsSection, FeaturedProductsSkeleton } from '@/components/sections/FeaturedProductsSection';
 import { Button } from '@/components/ui/Button';
-import { getFeaturedProducts } from '@/lib/sanity/client';
-import { ArrowRight, Sparkles } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
+import { Suspense } from 'react';
 
 interface HomePageProps {
   params: Promise<{ locale: string }>;
@@ -19,10 +19,6 @@ export default async function HomePage({ params }: HomePageProps) {
   // Fetch translations for server component
   const t = await getTranslations('hero');
   const tAbout = await getTranslations('about');
-  const tProducts = await getTranslations('products');
-  
-  // Fetch featured products from Sanity CMS
-  const featuredProducts = await getFeaturedProducts();
   
   return (
     <div className="w-full">
@@ -86,45 +82,10 @@ export default async function HomePage({ params }: HomePageProps) {
         </div>
       </section>
 
-      {/* Featured Products Section */}
-      <section className="py-20 bg-muted/30">
-        <div className="container-custom">
-          {/* Light elegant header */}
-          <div className="text-center mb-12 animate-slide-up">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-secondary/10 mb-6">
-              <Sparkles className="w-8 h-8 text-secondary" />
-            </div>
-            <h2 className="text-4xl md:text-5xl font-amiri font-bold mb-4">
-              {tProducts('featured')}
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              {tProducts('subtitle')}
-            </p>
-          </div>
-
-          <Divider variant="simple" />
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
-            {featuredProducts.map((product, index) => (
-              <div
-                key={product.id}
-                className="animate-slide-up"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                <ProductCard product={product} locale={locale} />
-              </div>
-            ))}
-          </div>
-
-          <div className="text-center mt-12">
-            <Link href={`/${locale}/products`}>
-              <Button size="lg" variant="secondary">
-                {tProducts('allProducts')}
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* Featured Products Section - Streamed with Suspense */}
+      <Suspense fallback={<FeaturedProductsSkeleton />}>
+        <FeaturedProductsSection locale={locale} />
+      </Suspense>
 
       {/* Brand Story Section */}
       <section className="py-20 relative overflow-hidden">

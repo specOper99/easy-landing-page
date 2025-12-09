@@ -27,17 +27,25 @@
 
 .dark {
   /* Dark Mode - Midnight Carpet Palette (improved readability) */
-  --color-primary: #D4A574;          /* Warm copper/camel - readable on dark */
+  --color-primary: #D4A574;
+  /* Warm copper/camel - readable on dark */
   --color-primary-foreground: #0C1B33;
-  --color-secondary: #C8A652;        /* Rich gold */
+  --color-secondary: #C8A652;
+  /* Rich gold */
   --color-secondary-foreground: #0C1B33;
-  --color-accent: #E8B4B8;           /* Soft rose - elegant accent */
+  --color-accent: #E8B4B8;
+  /* Soft rose - elegant accent */
   --color-accent-foreground: #0C1B33;
-  --color-background: #0C1B33;       /* Deep navy */
-  --color-foreground: #F5E6D3;       /* Warm cream - easy to read */
-  --color-border: #A89038;           /* Antique gold */
-  --color-muted: #1A2F4A;            /* Slightly lighter navy */
-  --color-muted-foreground: #C8A652; /* Gold for muted text */
+  --color-background: #0C1B33;
+  /* Deep navy */
+  --color-foreground: #F5E6D3;
+  /* Warm cream - easy to read */
+  --color-border: #A89038;
+  /* Antique gold */
+  --color-muted: #1A2F4A;
+  /* Slightly lighter navy */
+  --color-muted-foreground: #C8A652;
+  /* Gold for muted text */
 }
 
 * {
@@ -275,6 +283,20 @@ button {
 
 .animate-glow {
   animation: glow 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 1.5s ease-in-out infinite;
 }
 
 /* Flying Carpet Effect */

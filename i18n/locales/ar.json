@@ -38,7 +38,10 @@
         "outOfStock": "غير متوفر",
         "description": "الوصف",
         "roastLevel": "درجة التحميص",
-        "origin": "المنشأ"
+        "origin": "المنشأ",
+        "loading": "جاري التحميل...",
+        "loadMore": "عرض المزيد",
+        "endOfProducts": "لقد شاهدت جميع المنتجات"
     },
     "about": {
         "title": "عن لينتو",

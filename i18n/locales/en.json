@@ -38,7 +38,10 @@
         "outOfStock": "Out of Stock",
         "description": "Description",
         "roastLevel": "Roast Level",
-        "origin": "Origin"
+        "origin": "Origin",
+        "loading": "Loading...",
+        "loadMore": "Load More",
+        "endOfProducts": "You've seen all products"
     },
     "about": {
         "title": "About Lento",
