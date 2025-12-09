@@ -89,8 +89,9 @@ export default async function HomePage({ params }: HomePageProps) {
       {/* Featured Products Section */}
       <section className="py-20 bg-muted/30">
         <div className="container-custom">
+          {/* Light elegant header */}
           <div className="text-center mb-12 animate-slide-up">
-            <div className="flex justify-center mb-4">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-secondary/10 mb-6">
               <Sparkles className="w-8 h-8 text-secondary" />
             </div>
             <h2 className="text-4xl md:text-5xl font-amiri font-bold mb-4">
@@ -101,7 +102,7 @@ export default async function HomePage({ params }: HomePageProps) {
             </p>
           </div>
 
-          <Divider variant="ornate" />
+          <Divider variant="simple" />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
             {featuredProducts.map((product, index) => (
@@ -147,22 +148,70 @@ export default async function HomePage({ params }: HomePageProps) {
 
             <Divider variant="ornate" />
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-8">
-              {['quality', 'tradition', 'craftsmanship'].map((value) => (
-                <div key={value} className="text-center p-6 rounded-lg bg-muted/50 hover:bg-muted transition-colors">
-                  <h3 className="text-2xl font-amiri font-bold text-secondary mb-3">
-                    {tAbout(value)}
-                  </h3>
-                  <p className="text-sm text-muted-foreground">
-                    {tAbout(`${value}Text`)}
-                  </p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-8">
+              {[
+                { 
+                  key: 'quality', 
+                  gradient: 'from-amber-500/15 to-orange-500/5',
+                  accentColor: 'text-amber-500',
+                  pattern: (
+                    <svg className="w-20 h-20" viewBox="0 0 100 100" fill="currentColor" opacity="0.2">
+                      <circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" strokeWidth="2"/>
+                      <circle cx="50" cy="50" r="25" fill="none" stroke="currentColor" strokeWidth="2"/>
+                      <circle cx="50" cy="50" r="10"/>
+                    </svg>
+                  )
+                },
+                { 
+                  key: 'tradition', 
+                  gradient: 'from-primary/15 to-secondary/5',
+                  accentColor: 'text-primary',
+                  pattern: (
+                    <svg className="w-20 h-20" viewBox="0 0 100 100" fill="currentColor" opacity="0.2">
+                      <polygon points="50,10 90,90 10,90" fill="none" stroke="currentColor" strokeWidth="2"/>
+                      <polygon points="50,30 75,75 25,75" fill="none" stroke="currentColor" strokeWidth="2"/>
+                      <circle cx="50" cy="55" r="8"/>
+                    </svg>
+                  )
+                },
+                { 
+                  key: 'craftsmanship', 
+                  gradient: 'from-emerald-500/15 to-teal-500/5',
+                  accentColor: 'text-emerald-500',
+                  pattern: (
+                    <svg className="w-20 h-20" viewBox="0 0 100 100" fill="currentColor" opacity="0.2">
+                      <rect x="20" y="20" width="60" height="60" fill="none" stroke="currentColor" strokeWidth="2" transform="rotate(45 50 50)"/>
+                      <rect x="30" y="30" width="40" height="40" fill="none" stroke="currentColor" strokeWidth="2" transform="rotate(45 50 50)"/>
+                      <circle cx="50" cy="50" r="6"/>
+                    </svg>
+                  )
+                },
+              ].map((item, index) => (
+                <div 
+                  key={item.key}
+                  className={`group relative p-6 pb-10 rounded-xl bg-gradient-to-br ${item.gradient} border border-border/50 hover:border-secondary/50 hover:shadow-lg transition-all duration-300 animate-slide-up overflow-hidden`}
+                  style={{ animationDelay: `${index * 100}ms` }}
+                >
+                  {/* Unique pattern at bottom-right */}
+                  <div className={`absolute -bottom-2 -right-2 ${item.accentColor} opacity-50 group-hover:opacity-80 transition-opacity`}>
+                    {item.pattern}
+                  </div>
+                  
+                  <div className="relative z-10 pr-6">
+                    <h3 className="text-2xl font-amiri font-bold text-foreground mb-3 group-hover:text-primary transition-colors">
+                      {tAbout(item.key)}
+                    </h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      {tAbout(`${item.key}Text`)}
+                    </p>
+                  </div>
                 </div>
               ))}
             </div>
 
             <div className="pt-8">
               <Link href={`/${locale}/about`}>
-                <Button size="lg" variant="accent">
+                <Button size="lg" variant="secondary">
                   {tAbout('mission')}
                 </Button>
               </Link>
