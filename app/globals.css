@@ -1,0 +1,302 @@
+@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@200;300;400;500;600;700;800&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Light Mode - Desert Carpet Palette */
+  --color-primary: #8B1E1E;
+  --color-primary-foreground: #FFFFFF;
+  --color-secondary: #C8A652;
+  --color-secondary-foreground: #1A1A1A;
+  --color-accent: #0F6B4F;
+  --color-accent-foreground: #FFFFFF;
+  --color-background: #FAF8F3;
+  --color-foreground: #1A1A1A;
+  --color-border: #C8A652;
+  --color-muted: #E9D7B1;
+  --color-muted-foreground: #5B3A29;
+
+  /* Font Variables */
+  --font-amiri: 'Amiri', serif;
+  --font-cairo: 'Cairo', sans-serif;
+  --font-inter: 'Inter', sans-serif;
+  --font-naskh: 'Noto Naskh Arabic', serif;
+}
+
+.dark {
+  /* Dark Mode - Midnight Carpet Palette (improved readability) */
+  --color-primary: #D4A574;          /* Warm copper/camel - readable on dark */
+  --color-primary-foreground: #0C1B33;
+  --color-secondary: #C8A652;        /* Rich gold */
+  --color-secondary-foreground: #0C1B33;
+  --color-accent: #E8B4B8;           /* Soft rose - elegant accent */
+  --color-accent-foreground: #0C1B33;
+  --color-background: #0C1B33;       /* Deep navy */
+  --color-foreground: #F5E6D3;       /* Warm cream - easy to read */
+  --color-border: #A89038;           /* Antique gold */
+  --color-muted: #1A2F4A;            /* Slightly lighter navy */
+  --color-muted-foreground: #C8A652; /* Gold for muted text */
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  color: var(--color-foreground);
+  background-color: var(--color-background);
+  font-family: var(--font-inter);
+  line-height: 1.6;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* RTL Support */
+[dir='rtl'] {
+  direction: rtl;
+  text-align: right;
+}
+
+[dir='rtl'] body {
+  font-family: var(--font-cairo);
+}
+
+[dir='ltr'] {
+  direction: ltr;
+  text-align: left;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-amiri);
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 0.5em;
+}
+
+[dir='rtl'] h1,
+[dir='rtl'] h2,
+[dir='rtl'] h3,
+[dir='rtl'] h4,
+[dir='rtl'] h5,
+[dir='rtl'] h6 {
+  font-family: var(--font-naskh);
+}
+
+h1 {
+  font-size: 3rem;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: 2.25rem;
+}
+
+h3 {
+  font-size: 1.875rem;
+}
+
+h4 {
+  font-size: 1.5rem;
+}
+
+p {
+  margin-bottom: 1em;
+}
+
+/* Smooth transitions */
+a,
+button {
+  transition: all 0.3s ease;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-muted);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-secondary);
+}
+
+/* Utility Classes */
+@layer components {
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .btn-primary {
+    @apply bg-primary text-primary-foreground px-6 py-3 rounded-md font-semibold hover:opacity-90 transition-all duration-300 hover:shadow-lg hover:scale-105;
+  }
+
+  .btn-secondary {
+    @apply bg-secondary text-secondary-foreground px-6 py-3 rounded-md font-semibold hover:opacity-90 transition-all duration-300 hover:shadow-lg hover:scale-105;
+  }
+
+  .carpet-texture {
+    position: relative;
+  }
+
+  .carpet-texture::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(45deg,
+        transparent,
+        transparent 10px,
+        rgba(0, 0, 0, 0.02) 10px,
+        rgba(0, 0, 0, 0.02) 20px);
+    pointer-events: none;
+  }
+
+  .dark .carpet-texture::before {
+    background-image:
+      repeating-linear-gradient(45deg,
+        transparent,
+        transparent 10px,
+        rgba(255, 255, 255, 0.02) 10px,
+        rgba(255, 255, 255, 0.02) 20px);
+  }
+
+  .ornate-border {
+    @apply border-2 border-border p-4 relative;
+  }
+
+  .ornate-border::before,
+  .ornate-border::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--color-border);
+  }
+
+  .ornate-border::before {
+    top: -2px;
+    left: -2px;
+    border-right: none;
+    border-bottom: none;
+  }
+
+  .ornate-border::after {
+    bottom: -2px;
+    right: -2px;
+    border-left: none;
+    border-top: none;
+  }
+}
+
+/* Animations */
+@keyframes gentle-pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.animate-gentle-pulse {
+  animation: gentle-pulse 3s ease-in-out infinite;
+}
+
+@keyframes sparkle {
+
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0) rotate(0deg);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1) rotate(180deg);
+  }
+}
+
+.animate-sparkle {
+  animation: sparkle 3s ease-in-out infinite;
+}
+
+@keyframes wave {
+
+  0%,
+  100% {
+    transform: translateY(0) scaleY(1);
+  }
+
+  50% {
+    transform: translateY(-5px) scaleY(1.02);
+  }
+}
+
+.animate-wave {
+  animation: wave 2s ease-in-out infinite;
+}
+
+@keyframes glow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(200, 166, 82, 0.3);
+  }
+
+  50% {
+    box-shadow: 0 0 40px rgba(200, 166, 82, 0.6), 0 0 60px rgba(200, 166, 82, 0.4);
+  }
+}
+
+.animate-glow {
+  animation: glow 3s ease-in-out infinite;
+}
+
+/* Flying Carpet Effect */
+.carpet-shaped {
+  position: relative;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 50%, var(--color-accent) 100%);
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.3),
+    0 0 20px rgba(200, 166, 82, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.carpet-shaped::before {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border-radius: 6px;
+  background: repeating-linear-gradient(45deg,
+      transparent,
+      transparent 10px,
+      rgba(255, 255, 255, 0.03) 10px,
+      rgba(255, 255, 255, 0.03) 20px);
+  pointer-events: none;
+}

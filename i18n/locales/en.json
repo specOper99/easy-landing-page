@@ -1,0 +1,99 @@
+{
+    "nav": {
+        "home": "Home",
+        "products": "Products",
+        "about": "About",
+        "contact": "Contact"
+    },
+    "hero": {
+        "title": "Lento Coffee",
+        "subtitle": "Crafted Slowly. Inspired by Heritage.",
+        "tagline": "A cup woven with patience and tradition",
+        "cta": "Explore Our Collection",
+        "learnMore": "Learn More"
+    },
+    "products": {
+        "title": "Our Collection",
+        "subtitle": "Flavors woven with care",
+        "featured": "Featured Products",
+        "allProducts": "All Products",
+        "filter": "Filter by Category",
+        "search": "Search products...",
+        "categories": {
+            "all": "All",
+            "arabica": "Arabica",
+            "robusta": "Robusta",
+            "blend": "Blend",
+            "specialty": "Specialty"
+        },
+        "addToCart": "Add to Cart",
+        "viewDetails": "View Details",
+        "relatedProducts": "Related Products",
+        "price": "Price",
+        "rating": "Rating"
+    },
+    "about": {
+        "title": "About Lento",
+        "story": "Our Story",
+        "storyText": "Lento Coffee was born from a passion for slow, deliberate craftsmanship. Inspired by the intricate patterns of Arabian carpets, each cup we create is a masterpiece woven with patience, tradition, and love.",
+        "mission": "Our Mission",
+        "missionText": "To bring the richness of heritage and the warmth of authentic flavors to every coffee lover, one carefully crafted cup at a time.",
+        "values": "Our Values",
+        "quality": "Quality",
+        "qualityText": "Only the finest beans, selected with care",
+        "tradition": "Tradition",
+        "traditionText": "Honoring centuries of coffee culture",
+        "craftsmanship": "Craftsmanship",
+        "craftsmanshipText": "Every detail matters, every flavor refined"
+    },
+    "contact": {
+        "title": "Contact Us",
+        "subtitle": "We'd love to hear from you",
+        "form": {
+            "name": "Your Name",
+            "email": "Your Email",
+            "subject": "Subject",
+            "message": "Your Message",
+            "submit": "Send Message",
+            "success": "Thank you! We'll get back to you soon.",
+            "error": "Something went wrong. Please try again."
+        },
+        "info": {
+            "address": "Address",
+            "phone": "Phone",
+            "email": "Email",
+            "hours": "Hours"
+        },
+        "social": "Follow Us"
+    },
+    "footer": {
+        "tagline": "Slow coffee, rich heritage",
+        "quickLinks": "Quick Links",
+        "followUs": "Follow Us",
+        "newsletter": "Newsletter",
+        "newsletterText": "Subscribe to receive updates and special offers",
+        "emailPlaceholder": "Your email",
+        "subscribe": "Subscribe",
+        "rights": "All rights reserved.",
+        "privacy": "Privacy Policy",
+        "terms": "Terms of Service"
+    },
+    "common": {
+        "loading": "Loading...",
+        "error": "Error",
+        "tryAgain": "Try Again",
+        "close": "Close",
+        "readMore": "Read More",
+        "backHome": "Back to Home"
+    },
+    "theme": {
+        "light": "Light",
+        "dark": "Dark",
+        "toggle": "Toggle theme"
+    },
+    "language": {
+        "en": "English",
+        "ar": "Arabic",
+        "toggle": "Change language"
+    }
+}
