@@ -15,19 +15,18 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
     <button
       onClick={toggleTheme}
       className={cn(
-        'relative p-2 rounded-lg transition-all duration-300',
-        'bg-muted hover:bg-muted/80',
-        'border-2 border-border/30 hover:border-border',
+        'relative flex items-center justify-center w-10 h-10 rounded-lg transition-all duration-300',
+        'hover:bg-muted/60',
         'group',
         className
       )}
       aria-label="Toggle theme"
       title="Toggle theme"
     >
-      <div className="relative w-6 h-6">
+      <div className="relative w-5 h-5">
         <Sun 
           className={cn(
-            'absolute inset-0 w-6 h-6 text-secondary transition-all duration-300',
+            'absolute inset-0 w-5 h-5 text-secondary transition-all duration-300',
             theme === 'light' 
               ? 'rotate-0 scale-100 opacity-100' 
               : 'rotate-90 scale-0 opacity-0'
@@ -35,7 +34,7 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
         />
         <Moon 
           className={cn(
-            'absolute inset-0 w-6 h-6 text-accent transition-all duration-300',
+            'absolute inset-0 w-5 h-5 text-accent transition-all duration-300',
             theme === 'dark' 
               ? 'rotate-0 scale-100 opacity-100' 
               : '-rotate-90 scale-0 opacity-0'

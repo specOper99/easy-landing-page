@@ -208,12 +208,54 @@ npm run type-check # Run TypeScript checks
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new)
 
-1. Push code to GitHub
-2. Import project in Vercel
-3. Add environment variables
-4. Deploy!
+#### Quick Deploy
 
-**Auto-configuration**: Vercel automatically detects Next.js and applies optimal settings.
+1. **Push to GitHub**
+   ```bash
+   git init
+   git add .
+   git commit -m "Initial commit"
+   git branch -M main
+   git remote add origin git@github.com:YOUR_USERNAME/lento-coffee.git
+   git push -u origin main
+   ```
+
+2. **Import to Vercel**
+   - Go to [vercel.com/new](https://vercel.com/new)
+   - Select your repository
+   - Vercel auto-detects Next.js configuration
+
+3. **Configure Environment Variables**
+   
+   Add these in Vercel Dashboard → Project Settings → Environment Variables:
+   
+   | Variable | Value | Environment |
+   |----------|-------|-------------|
+   | `NEXT_PUBLIC_SANITY_PROJECT_ID` | Your Sanity project ID | All |
+   | `NEXT_PUBLIC_SANITY_DATASET` | `production` | All |
+   | `NEXT_PUBLIC_SANITY_API_VERSION` | `2024-03-15` | All |
+   | `SANITY_API_TOKEN` | Your Sanity write token | All |
+   | `NEXT_PUBLIC_SITE_URL` | Your Vercel domain | Production |
+
+4. **Deploy!**
+   - Click "Deploy"
+   - Vercel builds and deploys automatically
+
+#### Post-Deployment Checklist
+
+- [ ] Test both `/en` and `/ar` locales
+- [ ] Verify theme switching (light/dark mode)
+- [ ] Check Sanity CMS connection
+- [ ] Test responsive design on mobile
+- [ ] Verify image optimization is working
+
+#### Automatic Optimizations
+
+The project includes:
+- **Security Headers**: X-Frame-Options, X-Content-Type-Options, XSS Protection
+- **Caching**: Optimized for fonts, images, and videos
+- **Compression**: Enabled for all responses
+- **Edge Caching**: Configured via `vercel.json`
 
 ---
 

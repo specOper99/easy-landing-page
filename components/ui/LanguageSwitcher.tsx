@@ -24,17 +24,16 @@ export function LanguageSwitcher({ currentLocale, className }: LanguageSwitcherP
     <button
       onClick={switchLocale}
       className={cn(
-        'flex items-center gap-2 px-3 py-2 rounded-lg transition-all duration-300',
-        'bg-muted hover:bg-muted/80',
-        'border-2 border-border/30 hover:border-border',
+        'flex items-center justify-center gap-1.5 h-10 px-3 rounded-lg transition-all duration-300',
+        'hover:bg-muted/60',
         'group',
         className
       )}
       aria-label="Switch language"
       title="Switch language"
     >
-      <Globe className="w-5 h-5 text-secondary transition-transform group-hover:rotate-12" />
-      <span className="text-sm font-semibold uppercase">
+      <Globe className="w-4 h-4 text-secondary transition-transform group-hover:rotate-12" />
+      <span className="text-sm font-medium">
         {currentLocale === 'en' ? 'العربية' : 'EN'}
       </span>
     </button>
