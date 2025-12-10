@@ -4,6 +4,9 @@
 
 A customizable landing page template with Arabian carpet aesthetics, built with Next.js, TypeScript, and modern web technologies. Clone it, configure it, and deploy your own branded site!
 
+**[Live Demo](https://lento-eta.vercel.app)**
+
+
 ![Next.js](https://img.shields.io/badge/Next.js-15-black)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.4-blue)
 ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.4-38bdf8)
